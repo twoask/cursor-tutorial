@@ -11,7 +11,7 @@ interface MemeCanvasProps {
   textBoxes: TextBox[];
   onTextBoxesChange: (boxes: TextBox[]) => void;
   initialTextBoxes?: TextBox[];
-  canvasRef?: React.RefObject<HTMLCanvasElement>;
+  canvasRef?: React.RefObject<HTMLCanvasElement | null>;
 }
 
 export function MemeCanvas({

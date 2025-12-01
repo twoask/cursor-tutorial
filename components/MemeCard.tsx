@@ -37,16 +37,16 @@ export function MemeCard({ meme, onImageClick }: MemeCardProps) {
       if (hasUpvoted && upvoteData?.upvotes) {
         // Remove upvote
         const upvote = upvoteData.upvotes[0];
-        transact(
+        transact([
           tx.upvotes[upvote.id].delete(),
           tx.memes[meme.id].update({
             upvotes: Math.max(0, (meme.upvotes || 0) - 1),
           })
-        );
+        ]);
       } else {
         // Add upvote
         const upvoteId = dbId();
-        transact(
+        transact([
           tx.upvotes[upvoteId].update({
             memeId: meme.id,
             userId: user.id,
@@ -55,7 +55,7 @@ export function MemeCard({ meme, onImageClick }: MemeCardProps) {
           tx.memes[meme.id].update({
             upvotes: (meme.upvotes || 0) + 1,
           })
-        );
+        ]);
       }
     } catch (error) {
       console.error("Error upvoting:", error);
